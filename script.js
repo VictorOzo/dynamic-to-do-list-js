@@ -1,6 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', toDoFunc);
+
+function toDoFunc() {
 	// Select DOM elements
-	const addButton = document.getElementById('add-task');
+	const addButton = document.getElementById('add-task-btn');
 	const taskInput = document.getElementById('task-input');
 	const taskList = document.getElementById('task-list');
 
@@ -21,12 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		removeButton.textContent = 'Remove';
 		removeButton.classList.add('remove-btn');
 
-		// Add click event listener to remove button
-		removeButton.addEventListener('click', () => {
+		// Remove task function
+		removeButton.onclick = function () {
 			taskList.removeChild(listItem);
-		});
+		};
 
-		// Append remove button and list item to task list
+		// Append elements to the DOM
 		listItem.appendChild(removeButton);
 		taskList.appendChild(listItem);
 
@@ -34,11 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		taskInput.value = '';
 	}
 
-	// Add event listeners
+	// Event listeners
 	addButton.addEventListener('click', addTask);
 	taskInput.addEventListener('keypress', (event) => {
 		if (event.key === 'Enter') {
 			addTask();
 		}
 	});
-});
+
+	// Initial task (optional)
+	addTask(); // Uncomment to add an initial task
+}
